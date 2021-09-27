@@ -1,0 +1,9 @@
+{% extends 'wishlist/base/base.html' %}
+{% load static %}
+
+{% block tab_title %} Home {% endblock %}
+{% block body %}
+   <h3>List of all items marked by user goes here</h3>
+   {%include 'wishlist/includes/item.html'%}
+    {% endblock %}  
+  

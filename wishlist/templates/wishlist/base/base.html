@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist | {% block tab_title %}  {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'wishlist/styles/base.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <!-- Will need conditional for admin maybe-->
+    <header><h1>Welcome to Wishlist</h1></header>
+    <h2>You got a wish? Put it in a list!</h2>
+    <nav><h1><a href="/home">Wishlist</a></h1>
+        <div><h2><a href="/items">All items</a></h2></div>
+            <h2><a href="/account">Edit Account</a></h2></div>
+            <h2><a href="#">Logout</a></h2>
+        </nav></header>
+    <main>
+        {% block body %}
+        
+         {% endblock %}
+    </main>
+</body>
+</html>
