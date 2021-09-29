@@ -3,7 +3,11 @@
 
 {% block tab_title %} Home {% endblock %}
 {% block body %}
-   <h3>List of all items marked by user goes here</h3>
-   {%include 'wishlist/includes/item.html'%}
+   <h3>Your Items</h3>
+   <section id="all_items">
+      {%for item in items%}
+         {%include 'wishlist/includes/item.html' with name=item.name img=item.picture url=item.url description=item.description%}
+      {%endfor%}
+   </section>
     {% endblock %}  
   
