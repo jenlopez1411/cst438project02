@@ -13,13 +13,92 @@ def create_account(request):
     return render(request,'wishlist/create_account.html')
 
 def home(request):
-    return render(request,'wishlist/home.html')
+    wishlist = [{
+            "list_id": "1",
+            "user_id": "1",
+            "list_name": "Aang Wishlist",
+            "slug": "aang-wishlist"
+            }, {
+            "list_id": "2",
+            "user_id": "1",
+            "list_name": "Sokka Wishlist",
+            "slug": "sokka-wishlist"
+            }]
+    return render(request,'wishlist/home.html',{'wishlist': wishlist})
 
 def all_items(request):
     return render(request,'wishlist/all_items.html')
 
-def full_list(request):
-    return render(request,'wishlist/full_list.html')
+def full_list(request, wishlist_slug):
+    wishlists = [{
+            "list_id": "1",
+            "user_id": "1",
+            "list_name": "Aang Wishlist",
+            "slug": "aang-wishlist"
+            }, {
+            "list_id": "2",
+            "user_id": "1",
+            "list_name": "Sokka Wishlist",
+            "slug": "sokka-wishlist"
+            }]
+    items = [{
+            "user_id": "1",
+            "list_id": "1",
+            "item_id": "1",
+            "name": "Appa Stuffed",
+            "url": "https://amzn.to/39Im8cz",
+            "description": "This is a stuffed Appa",
+            "picture": "https://i.imgur.com/HT9YCFB.png",
+            "user_priority": "high",
+            "slug": "stuffed-appa"
+            },
+            {
+            "user_id": "1",
+            "list_id": "2",
+            "item_id": "2",
+            "name": "Momo Stuffed",
+            "url": "https://amzn.to/2WkXR9q",
+            "description": "This is a stuffed Momo",
+            "picture": "https://imgur.com/fQe01dl",
+            "user_priority": "high",
+            "slug": "stuffed-momo",
+            },
+            {
+            "user_id": "1",
+            "list_id": "2",
+            "item_id": "3",
+            "name": "Momo Stuffed 2",
+            "url": "https://amzn.to/2WkXR9q",
+            "description": "This is a stuffed Momo 2",
+            "picture": "https://imgur.com/fQe01dl",
+            "user_priority": "high",
+            "slug": "stuffed-momo-2"
+            }
+            
+
+      ]
+    current_list = []
+    print("slug = ")
+    print(wishlist_slug)
+    for wishlist in wishlists:
+        print(wishlist["slug"])
+        print(wishlist["slug"] == wishlist_slug)
+        if wishlist["slug"] == wishlist_slug:
+            current_list.append(wishlist.copy())
+            break;
+    print("got list")
+    print(current_list)        
+    current_items = []
+    for item in items:
+        print(item)
+        print(item["list_id"])
+        
+        if item["list_id"] == current_list[0]["list_id"]:
+            current_items.append(item)
+    print(current_list)
+    print(current_items)
+
+    return render(request,'wishlist/full_list.html', {"wishlist":current_list[0], "items":current_items })
 
 # account page using dummy data
 def account(request):
