@@ -1,4 +1,6 @@
 <!--For List Page Box-->
-<h1>Wishlist Name</h1>
+<h1>{{wishlist.name}}</h1>
 <!--Item Loop Here-->
-{%include 'wishlist/includes/item.html'%}
+{% for item in items %}
+{% include 'wishlist/includes/item.html' with name=item.name img=item.picture url=item.url description=item.description %}
+{% endfor %}
