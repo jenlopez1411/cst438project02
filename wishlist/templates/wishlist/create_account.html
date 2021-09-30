@@ -7,4 +7,22 @@
  
 {% block body %}
    Create an Account with Model Form
+   <form action="" style="border:1px solid #ccc">
+       <div class="container">
+            <h1>Sign up</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
+
+            <label for="user"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <button type="button">Sign Up</button>
+            </div>
+        </div>
+   </form>
     {% endblock %}

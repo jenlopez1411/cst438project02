@@ -5,4 +5,22 @@
 
 {% block body %}
    Login with Model form
+   <form action="action_page.php" style="border:1px solid #ccc">
+      <div class="container">
+           <h1>Login Form</h1>
+           <hr>
+
+           <label for="user"><b>Enter Username</b></label>
+           <input type="text" placeholder="Username" name="username" required>
+
+           <label for="psw"><b>Enter Password</b></label>
+           <input type="password" placeholder="Password" name="psw" required>
+
+
+            <button type="submit">Login Up</button>
+       </div>
+       <div>
+          <button type="button">Cancel</button>
+       </div>
+  </form>
     {% endblock %}

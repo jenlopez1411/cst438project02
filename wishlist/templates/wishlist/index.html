@@ -1,8 +1,11 @@
-{% extends 'wishlist/base/landing.html' %}
+{% extends 'wishlist/base/base.html' %}
 {% load static %}
 
 {%block title %}Landing {% endblock  %}
 
 {% block body %}
     Landing Page with Login and Sign Up redirect
+    <center>
+    <div><h2><a href="/create-account" class="button3">Create Account</a></h2></div>
+    <h2><a href="/login" class="button3">Go To Login</a></h2></center>
     {% endblock %}
