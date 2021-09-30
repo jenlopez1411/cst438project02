@@ -1,0 +1,20 @@
+{% extends 'wishlist/base/base.html' %}
+{% load static %}
+
+{% block tab_title % } Account { %endblock % }
+{% block body %}
+
+<center><h1><b>EditUser Info</b></h1>
+    <br>
+
+    <h2> Edit First Name: <input type="text" name = "newFname" placeholder = "First Name"></h2>
+
+    <h2> Edit First Name: <input type="text" name = "newLname" placeholder = "Last Name"></h2>
+
+    <h2> Edit Userame: <input type="text" name = "newUname" placeholder = "Username"></h2>
+
+    <button onclick="location.href = '/account'">Cancel</button>
+    <button onclick="location.href = '/home'">Update</button>
+    
+</center>
+    {% endblock %}  

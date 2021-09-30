@@ -11,13 +11,30 @@
 <body>
     <!-- Header -->
     <!-- Will need conditional for admin maybe-->
-    <header><h1>Welcome to Wishlist</h1></header>
-    <h2>You got a wish? Put it in a list!</h2>
-    <nav><h1><a href="/home">Wishlist</a></h1>
+    <center><header><h1>Welcome to Wishlist</h1></header><center>
+    <center><h2>You got a wish? Put it in a list!</h2><center>
+
+        <header>
+            <div class="nav">
+              <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/createAccount">Sign Up</a></li>
+                <li><a href="/admin">Admin Log In</a></li>
+                <!-- <li><a href="">Contact</a></li> -->
+              </ul>
+            </div>
+          </header>
+
+        
+    <!-- <hr>
+        <h1><a href="/home">Wishlist</a></h1>
         <div><h2><a href="/items">All items</a></h2></div>
-            <h2><a href="/account">Edit Account</a></h2></div>
-            <h2><a href="#">Logout</a></h2>
-        </nav></header>
+        <h2><a href="/login">Login</a></h2></div>
+        <h2><a href="/create_account">Create Account</a></h2></div>
+        <h2><a href="/admin">Admin Sign In</a></h2></div>
+    </hr></header> -->
+
     <main>
         {% block body %}
         

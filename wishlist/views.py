@@ -21,10 +21,26 @@ def all_items(request):
 def full_list(request):
     return render(request,'wishlist/full_list.html')
 
+# account page using dummy data
 def account(request):
-    return render(request,'wishlist/account.html')
+    dummyUser = [
+        {'firstName': 'Jane',
+        'lastName': 'Doe',
+        'user_id': '1',
+        'username': 'jdoe',
+        'password': '12345',
+        'admin': 'false'
+        }
+        
+    ]
+    return render(request,'wishlist/account.html', {
+        'users': dummyUser
+    })
+
+# edit account page also using dummy data 
+def editAccount(request):
+    
+    return render(request,'wishlist/editAccount.html')
 
 def item_edit(request):
     return render(request,'wishlist/item_edit.html')
-
-       
