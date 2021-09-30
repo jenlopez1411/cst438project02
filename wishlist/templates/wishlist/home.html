@@ -3,7 +3,10 @@
 
 {% block tab_title %} Home {% endblock %}
 {% block body %}
-   List of User Wishlist goes here
-   {%include 'wishlist/includes/list.html'%}
+   <section id="wishlist_list">
+   {% for list in wishlist %}
+   {% include 'wishlist/includes/list.html' with name=list.list_name id=list.list_id slug=list.slug %}
+   {% endfor%}
+</section>
     {% endblock %}  
   
