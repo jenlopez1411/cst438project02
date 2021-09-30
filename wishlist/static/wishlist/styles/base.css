@@ -1,3 +1,29 @@
 html {
     background-color: cadetblue;
 }
+
+.nav ul {
+    list-style: horizontal;
+    background-color: darkcyan;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+  .nav li {
+    display: inline;
+  }
+   
+  .nav a {
+    display: block;
+    padding: 8px;
+  }
+   
+  .nav a:hover {
+    background-color: #005f5f;
+  }
+   
+  .nav a.active {
+    background-color: #fff;
+    color: #444;
+    cursor: default;
+  }

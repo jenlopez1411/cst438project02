@@ -10,6 +10,7 @@ urlpatterns = [
     path('items', views.all_items, name='items'),
     path('items/list', views.full_list, name='full-list'),
     path('account/', views.account, name='account'),
-    path('item/edit/', views.item_edit, name='item-edit')
+    path('item/edit/', views.item_edit, name='item-edit'),
+    path('editAccount/', views.editAccount, name = 'editAccount')
 
 ]
