@@ -5,7 +5,6 @@
 {% block body %}
 
    List of User Wishlist goes here
-   <h2><a href="/account">Account</a></h2></div>
    <section id="wishlist_list">
    {% for list in wishlist %}
    {% include 'wishlist/includes/list.html' with name=list.list_name id=list.list_id slug=list.slug %}
