@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+print("********************")
+print("Base dir: ",  BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +29,8 @@ SECRET_KEY = 'django-insecure-hipbjc#((lnc5fn8ipg$psp_1#1i@da=hj1*hd3+2=0b)w%54v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wishlistgroupn.herokuapp.com',
+                'localhost']
 
 
 # Application definition
@@ -119,6 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "wishlist/static"),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
