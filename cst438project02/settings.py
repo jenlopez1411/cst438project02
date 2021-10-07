@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-hipbjc#((lnc5fn8ipg$psp_1#1i@da=hj1*hd3+2=0b)w%54v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wishlistgroupn.herokuapp.com']
 
 
 # Application definition
