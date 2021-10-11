@@ -5,13 +5,6 @@
 
 {% block body %}
     Landing Page with <a href="/login">Login</a> and <a href="/create-account">Create an Account</a> redirect
-    {% extends 'wishlist/base/base.html' %}
-{% load static %}
-
-{%block title %}Landing {% endblock  %}
-
-{% block body %}
-    Landing Page with <a href="/login">Login</a> and <a href="/create-account">Create an Account</a> redirect
     <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
     <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
 
@@ -82,6 +75,4 @@
             }
         }
         </script>
-        {% endblock %}
-
     {% endblock %}
