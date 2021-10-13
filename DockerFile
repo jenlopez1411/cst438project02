@@ -42,7 +42,10 @@ RUN pip3 install pipenv
 
 RUN pip3 install --no-cache-dir -r /app/requirements.txt
 RUN pip3 install gunicorn
+#RUN apt-get install default-mysql-client -y
 RUN python manage.py collectstatic
+
+
 
 EXPOSE 8888
 CMD gunicorn cst438project02.wsgi:application --bind 0.0.0.0:$PORT
