@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'cst438project02.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': BASE_DIR / 'db.mysql',
+         'USER': 'yiakr1drv9hh1emx',
+        'PASSWORD': 'llbtbi48zdzksa70',
+        'HOST': 'dcrhg4kh56j13bnu.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',   # Or an IP Address that your database is hosted on
+        'PORT': '3306',
     }
 }
 
