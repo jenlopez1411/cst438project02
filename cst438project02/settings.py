@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+from django.db import connection
 from pathlib import Path
 import os
 
@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'cst438project02.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'j9p1pzm0hg8rjv3q', # database
+        'USER': 'ztk6d0oyndylw39x',
+        'PASSWORD': 'ow6zisx04xhgshwb',
+        'HOST': 'dcrhg4kh56j13bnu.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',   # Or an IP Address that your database is hosted on
+        'PORT': '3306',
     }
 }
 

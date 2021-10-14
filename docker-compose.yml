@@ -2,19 +2,22 @@ version: "3.9"
    
 services:
   db:
-    image: postgres
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
+    image: mysql
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+       MYSQL_DATABASE: 'j9p1pzm0hg8rjv3q'
+       MYSQL_USER: 'ztk6d0oyndylw39x'
+       MYSQL_PASSWORD: 'ow6zisx04xhgshwb'
+       MYSQL_ROOT_PASSWORD: '438groupn'
+    expose:
+      - '3306'
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8888
     volumes:
-      - .:/code
+      - .:/cst438project02
     ports:
       - "8888:8888"
     depends_on:
       - db
+
+
