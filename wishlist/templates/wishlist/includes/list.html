@@ -1,3 +1,7 @@
 <!--For List Box on Home Page-->
 <!--ToDo: Change to a GET CALL-->
-<h3><a href="{% url 'full-list' slug %}">{{name}}</a></h3>
+<!-- <h3><a>{{name}}</a></h3> -->
+<form action="{% url 'full-list' %}">
+<input type="hidden"name='list_id' value={{id}}>
+<button type="submit">Go to {{name}}</button>
+</form>
