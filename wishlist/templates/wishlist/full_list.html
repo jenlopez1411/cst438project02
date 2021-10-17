@@ -1,10 +1,10 @@
 {% extends 'wishlist/base/base.html' %}
 {% load static %}
 
-{% block tab_title %} {{wishlist.name}} {% endblock %}
+{% block tab_title %} {{wishlist.list_name}} {% endblock %}
 {% block body %}
    
-   {{wishlist.name}} 
+   {{wishlist.list_name}} 
    {%include 'wishlist/includes/fulllist.html' with items=items%}
     {% endblock %}  
   
