@@ -5,3 +5,7 @@
 <input type="hidden"name='list_id' value={{id}}>
 <button type="submit">Go to {{name}}</button>
 </form>
+<form action="{% url 'delete-list' %}" method="DELETE">
+    <input type="hidden"name='list_id' value={{id}}>
+    <button type="submit" style="background-color:red;">Delete {{name}}</button>
+    </form>

@@ -4,7 +4,11 @@
 {% block tab_title %} {{wishlist.list_name}} {% endblock %}
 {% block body %}
    
-   <h1>{{wishlist.list_name}}</h1> 
+   <h1>{{wishlist.list_name}}</h1>
+   <form action="{% url 'delete-list' %}" method="DELETE">
+      <input type="hidden"name='list_id' value={{id}}>
+      <button type="submit" style="background-color:red;">Delete {{name}}</button>
+      </form> 
       <details>
          <summary>
            <h1>Add an item to your list!</h1>

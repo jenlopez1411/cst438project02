@@ -14,5 +14,6 @@ urlpatterns = [
     path('editAccount/', views.editAccount, name = 'editAccount'),
     path('logout/', views.logout, name='logout'),
     path('new-list/',views.new_list, name='new-list'),
-    path('new-item/',views.new_item, name='new-item')
+    path('new-item/',views.new_item, name='new-item'),
+    path('delete-list', views.delete_list, name='delete-list')
 ]

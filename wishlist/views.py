@@ -68,8 +68,10 @@ def new_item(request):
     return redirect('/items/list/')
 
 def delete_list(request):
-
-    redirect('/home/')
+#Todo: add confirmation to delete
+    list = List.objects.filter(list_id=request.GET.get("list_id"))
+    list.delete()
+    return redirect('/home/')
 
 # account page using dummy data
 def account(request):
