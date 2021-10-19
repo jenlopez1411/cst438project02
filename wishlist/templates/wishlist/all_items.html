@@ -6,7 +6,7 @@
    <h3>Your Items</h3>
    <section id="all_items">
       {%for item in items%}
-         {%include 'wishlist/includes/item.html' with name=item.name img=item.picture url=item.url description=item.description%}
+         {%include 'wishlist/includes/item.html' with item=item%}
       {%endfor%}
    </section>
     {% endblock %}  
