@@ -27,6 +27,7 @@ def create_account(request):
 def home(request):
     if request.session['user_id'] > 0:
         wishlist_list = List.objects.filter(user_id = request.session['user_id'])
+        request.session['current_list'] = '0'
     else:
         return redirect('/login/')
 
