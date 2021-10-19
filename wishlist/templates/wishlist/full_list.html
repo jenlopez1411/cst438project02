@@ -1,10 +1,43 @@
 {% extends 'wishlist/base/base.html' %}
 {% load static %}
 
-{% block tab_title %} {{wishlist.name}} {% endblock %}
+{% block tab_title %} {{wishlist.list_name}} {% endblock %}
 {% block body %}
    
-   {{wishlist.name}} 
+   <h1>{{wishlist.list_name}}</h1>
+   <form action="{% url 'delete-list' %}" method="DELETE">
+      <input type="hidden"name='list_id' value={{id}}>
+      <button type="submit" style="background-color:red;">Delete {{name}}</button>
+      </form> 
+      <details>
+         <summary>
+           <h1>Add an item to your list!</h1>
+         </summary>
+         <section>
+            <form action='/new-item/' method="POST">
+               {% csrf_token %} 
+               <label for="item_name"><b>Item Name</b></label>
+                   <input type="text" placeholder="New Item Name" name="new_name" required>
+                   <label for="url"><b>Item URL</b></label>
+                   <input type="text" placeholder="New Item URL" name="new_url">
+                   <label for="description"><b>Item Description</b></label>
+                   <input type="text" placeholder="New Item Description" name="new_description">
+                   <label for="picture_url"><b>Item Picture URL</b></label>
+                   <input type="text" placeholder="New Item Picture URL" name="new_picture_url">
+                   <label for="priority"><b>Priority</b></label>
+                   <select name="priority" >
+                     <option value="high">High</option>
+                     <option value="medium">Medium</option>
+                     <option value="low">Low</option>
+                     </select>
+                     <input type="hidden" value='{{wishlist.list_id}}' name='list_id'>
+                   <button type='submit'>Add a new Item!</button>
+            </form>
+         </section>
+       </details>
+      
    {%include 'wishlist/includes/fulllist.html' with items=items%}
+
+   
     {% endblock %}  
   
