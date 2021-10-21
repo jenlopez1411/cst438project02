@@ -1,3 +1,4 @@
+from django.http import response
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from wishlist.models import Users, List, Items
@@ -12,23 +13,30 @@ def login(request):
         user = request.POST
         users = Users.objects.all()
         for u in users.iterator():
-            if user["username"] == u.user_name:
-                print(user["username"] + " match")
-                return render(request, 'wishlist/home.html', {'userID': u.user_id})
-    return render(request,'wishlist/login.html')
+            if user["uname"] == u.user_name:
+                print(user["uname"] + " match")
+                # return render(request, 'wishlist/home.html', {'userID': u.user_id})
+                request.session['user_id'] = Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id
+                request.session['current_list'] = 0
+                return redirect('/home/')
+    else:
+        return render(request,'wishlist/login.html')
 
 def create_account(request):
     if request.method == 'POST':
         name = request.POST
-        print(name["name"])
-        print(name["username"])
-        print(name["password"])
-        print(name["password-repeat"])
-        if name["password"] == name["password-repeat"]:
-            Users.objects.create(first_name = name["name"], user_name = name["username"], password = name["password"])
-        else: 
-            print("error mess")
-    return render(request,'wishlist/index.html')
+        if Users.objects.filter(user_name=request.POST.get("uname")).exists():
+            print("error exists")
+            return render(request, 'wishlist/index.html', {'message': "Username already exists."})
+        else:
+            if name["psw"] == name["psw-repeat"]:
+                Users.objects.create(first_name = name["name"], user_name = name["uname"], password = name["psw"])
+                print("pasa")
+            else: 
+                print("error create acc")
+                #return render( request, 'wishlist/create_account.html', {'message': "Password does not match."})
+                return redirect('create-account', message = "Password does not match.")
+    return redirect('/')
 
 def home(request):
     if request.session['user_id'] > 0:
@@ -106,4 +114,4 @@ def item_edit(request):
 
 def logout(request):
      request.session['user_id'] = -1;
-     return redirect('/login/')
+     return redirect('/')
