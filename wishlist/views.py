@@ -1,18 +1,39 @@
+from django.core.checks import messages
 from django.http.response import HttpResponse
 from django.shortcuts import render
+from django.contrib import messages
+from wishlist.models import Users
 
 
 # Create your views here.
 def index(request):
+    if request.method == 'POST':
+        name = request.POST
+        print(name["name"])
+        print(name["username"])
+        print(name["password"])
+        print(name["password-repeat"])
+        if name["password"] == name["password-repeat"]:
+            Users.objects.create(first_name = name["name"], user_name = name["username"], password = name["password"])
+        else: 
+            print("error mess")
+            messages.error(request, 'Password does not match')
     return render(request,'wishlist/index.html')
 
 def login(request):
+    if request.method == 'POST':
+        user = request.POST
+        users = Users.objects.all()
+        for u in users.iterator():
+            if user["username"] == u.user_name:
+                print(user["username"] + " match")
+                return render(request, 'wishlist/home.html', {'userID': u.user_id})
     return render(request,'wishlist/login.html')
 
 def create_account(request):
     return render(request,'wishlist/create_account.html')
 
-def home(request):
+def home(request):        
     wishlist = [{
             "list_id": "1",
             "user_id": "1",
@@ -102,6 +123,7 @@ def full_list(request, wishlist_slug):
 
 # account page using dummy data
 def account(request):
+    print("hello there")
     dummyUser = [
         {'firstName': 'Jane',
         'lastName': 'Doe',
