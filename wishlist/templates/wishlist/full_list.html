@@ -4,14 +4,14 @@
 {% block tab_title %} {{wishlist.list_name}} {% endblock %}
 {% block body %}
    
-   <h1>{{wishlist.list_name}}</h1>
    <form action="{% url 'delete-list' %}" method="DELETE">
+      <h1>{{wishlist.list_name}}<button type="submit" style="background-color: transparent; display:inline; width:10px; font-size:25px; color:gray;">
+         <i class="far fa-trash-alt"></i></button></h1>
       <input type="hidden"name='list_id' value={{id}}>
-      <button type="submit" style="background-color:red;">Delete {{name}}</button>
       </form> 
+      <h3>Add an item to your list!</h3>
       <details>
          <summary>
-           <h1>Add an item to your list!</h1>
          </summary>
          <section>
             <form action='/new-item/' method="POST">
@@ -37,7 +37,6 @@
        </details>
       
    {%include 'wishlist/includes/fulllist.html' with items=items%}
-
    
     {% endblock %}  
   
