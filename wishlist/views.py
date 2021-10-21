@@ -123,7 +123,6 @@ def full_list(request, wishlist_slug):
 
 # account page using dummy data
 def account(request):
-    print("hello there")
     dummyUser = [
         {'firstName': 'Jane',
         'lastName': 'Doe',
