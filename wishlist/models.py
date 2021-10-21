@@ -7,12 +7,12 @@ class Users(models.Model):
     first_name = models.CharField(max_length=200)
     user_name = models.CharField(max_length=200)
     password = models.CharField(max_length=200)
-    
+        
     class Meta:
         managed = True
         db_table = 'User'
     
-    
+
 class Items(models.Model):
      item_id = models.AutoField(primary_key=True)
      user_id = models.IntegerField()
@@ -38,4 +38,13 @@ class List(models.Model):
     class Meta:
         managed = True
         db_table = 'List'
-    
+
+class AdminUsers(models.Model): 
+    user_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=200)
+    user_name = models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
+
+    class Meta:
+        managed = True
+        db_table = 'AdminUsers'
