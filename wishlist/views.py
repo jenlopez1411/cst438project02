@@ -4,25 +4,31 @@ from wishlist.models import Users, List, Items
 
 
 # Create your views here.
-def index(request):
+def index(request):    
     return render(request,'wishlist/index.html')
 
 def login(request):
-    print(request.method)
-    if(request.method == 'POST'):
-        # print(request.POST.get("uname"))
-        # print(request.POST.get("psw"))
-        # print(Users.objects.filter(user_name=request.POST.get("uname"), password = request.POST.get("psw")).exists())
-        if Users.objects.filter(user_name=request.POST.get("uname"), password = request.POST.get("psw")).exists():
-            print(Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id)
-            request.session['user_id'] = Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id
-            request.session['current_list'] = 0
-            return redirect('/home/')
-    else:        
-        return render(request,'wishlist/login.html')
+    if request.method == 'POST':
+        user = request.POST
+        users = Users.objects.all()
+        for u in users.iterator():
+            if user["username"] == u.user_name:
+                print(user["username"] + " match")
+                return render(request, 'wishlist/home.html', {'userID': u.user_id})
+    return render(request,'wishlist/login.html')
 
 def create_account(request):
-    return render(request,'wishlist/create_account.html')
+    if request.method == 'POST':
+        name = request.POST
+        print(name["name"])
+        print(name["username"])
+        print(name["password"])
+        print(name["password-repeat"])
+        if name["password"] == name["password-repeat"]:
+            Users.objects.create(first_name = name["name"], user_name = name["username"], password = name["password"])
+        else: 
+            print("error mess")
+    return render(request,'wishlist/index.html')
 
 def home(request):
     if request.session['user_id'] > 0:
