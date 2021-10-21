@@ -1,11 +1,11 @@
 <!--For Item Box-->
 <section id="item">
     <h4>{{item.name}}</h4>
-    <img src="{{item.picture_url}}.png"><br>
+    <img src="{{item.picture_url}}"><br>
     <a target="_blank" href="{{item.url}}">URL</a>
     <p>{{item.description}}</p>
-    <form action="item/edit/">
+    <form action="edit/">
         <input type="hidden" value="{{item.item_id}}">
-        <button type="button">Edit Item</button>
+        <button type="submit">Edit Item</button>
     </form>
 </section>
