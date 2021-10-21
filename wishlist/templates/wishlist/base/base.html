@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist | {% block tab_title %}  {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'wishlist/styles/base.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header -->
@@ -17,11 +18,11 @@
         <header>
             <div class="nav">
               <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/items">All Items</a></li>
-                <li><a href="/account">Account</a></li>
-                <li><a href="/admin">Admin Login</a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li><a href="/home"><span><i class="fas fa-home"></i></span>Home</a></li>
+                <li><a href="/items"><span><i class="fas fa-list-ul"></i></span>All Items</a></li>
+                <li><a href="/account"><span><i class="far fa-user"></i></span>Account</a></li>
+                <li><a href="/admin"><span><i class="fas fa-user-lock"></i></span>Admin Login</a></li>
+                <li><a href="/logout"><span><i class="fas fa-sign-out-alt"></i></span>Logout</a></li>
                 <!-- <li><a href="">Contact</a></li> -->
               </ul>
             </div>

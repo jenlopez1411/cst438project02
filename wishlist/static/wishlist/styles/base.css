@@ -1,21 +1,48 @@
 html {
-  background-color: cadetblue;
+  background-color: rgb(213, 231, 225);
+  font-family: Georgia;
+}
+body{
+  padding-top: 50px;
+  margin: 0;
 }
 
 .nav ul {
-  list-style: horizontal;
+  list-style-type: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
   background-color: darkcyan;
-  text-align: center;
   padding: 0;
+  overflow: hidden;
   margin: 0;
 }
 .nav li {
-  display: inline;
+  float: left;
+  border-right:0px solid #bbb;
+}
+
+.nav i{
+  position: relative;
+  float: left;
+  font-size: 16px;
+  color:rgb(213, 231, 225);
+  text-align: center;
+  padding-right: 7px;
 }
  
 .nav a {
-  display: block;
-  padding: 8px;
+  display: inline-block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: rgb(213, 231, 225);
+  font-size: 18px;
+}
+
+.nav a:visited{
+  text-decoration: none;
+  color: rgb(213, 231, 225);
 }
  
 .nav a:hover {
