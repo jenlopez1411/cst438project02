@@ -50,9 +50,9 @@
             <input type="text" placeholder="Enter Username" name="uname" required>
       
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" placeholder="Enter Password" name="psw" id="password" required>
             <label for="psw"><b>Repeat Password</b></label>
-            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" id="repeatPassword" required>
               
             <button type="submit">Sign Up</button>
             <label>
@@ -75,9 +75,9 @@
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
         }
         </script>
     {% endblock %}

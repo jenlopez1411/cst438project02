@@ -16,7 +16,7 @@ def login(request):
             if user["uname"] == u.user_name:
                 print(user["uname"] + " match")
                 # return render(request, 'wishlist/home.html', {'userID': u.user_id})
-                request.session['user_id'] = Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id
+                request.session['user_id'] = Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id                
                 request.session['current_list'] = 0
                 return redirect('/home/')
     else:
