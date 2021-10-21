@@ -1,6 +1,6 @@
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from wishlist.models import Users, List, Items
+from wishlist.models import Users, List, Items, AdminUsers
 
 
 # Create your views here.
@@ -80,21 +80,15 @@ def delete_list(request):
     list.delete()
     return redirect('/home/')
 
-# account page using dummy data
-def account(request):
-    dummyUser = [
-        {'firstName': 'Jane',
-        'lastName': 'Doe',
-        'user_id': '1',
-        'username': 'jdoe',
-        'password': '12345',
-        'admin': 'false'
-        }
-        
-    ]
-    return render(request,'wishlist/account.html', {
-        'users': dummyUser
+# account page 
+def account(request, user_id):
+    selected_user = Users.objects.get(user_id = user_id)
+
+    return render(request, 'wishlist/account.html', {
+        'fname': selected_user.first_name,
+        'userName': selected_user.user_name
     })
+
 
 # edit account page also using dummy data 
 def editAccount(request):
