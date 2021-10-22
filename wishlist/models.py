@@ -38,4 +38,11 @@ class List(models.Model):
     class Meta:
         managed = True
         db_table = 'List'
-    
+
+# class NewAdmin(models.Model):
+#     admin_username =  models.CharField(max_length=200)
+#     admin_password =  models.CharField(max_length=200)
+
+#     class Meta:
+#         managed = True
+#         db_table = 'Admin'
