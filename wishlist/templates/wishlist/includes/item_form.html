@@ -1,5 +1,7 @@
 <section id="item">
-    <form action="new-item/" method="post">
+    <form action="/new-item/" method="post">
+      {% csrf_token %}
+      
         <label for="itemname">Item:</label><br>
         <input type="text" id="itemname" name="itemname" value="{{item.name}}"><br>
         <label for="url">URL:</label>

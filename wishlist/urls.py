@@ -12,6 +12,7 @@ urlpatterns = [
     path('account/', views.account, name='account'),
     path('items/edit/', views.item_edit, name='item-edit'),
     path('items/list/edit/', views.item_edit, name='item-edit'),
+    path('edit/', views.item_edit, name='item-edit'),
     path('editAccount/', views.editAccount, name = 'editAccount'),
     path('logout/', views.logout, name='logout'),
     path('new-list/',views.new_list, name='new-list'),

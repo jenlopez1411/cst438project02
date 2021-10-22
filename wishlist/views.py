@@ -69,7 +69,7 @@ def new_item(request):
     if 'current_list' in request.session and request.POST.get("list_id")!= "0" :
      request.session['current_list'] = request.POST.get("list_id")
      return redirect('/items/list/')
-    return request('/items/')
+    return redirect('/items/')
 
 def delete_list(request):
 #Todo: add confirmation to delete
