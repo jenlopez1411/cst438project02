@@ -98,15 +98,15 @@ def account(request):
         'password': '12345',
         'admin': 'false'
         }
-        
     ]
     return render(request,'wishlist/account.html', {
         'users': dummyUser
     })
 
 # edit account page also using dummy data 
+def new_admin(request): 
+        return render(request,'wishlist/new_admin.html')
 def editAccount(request):
-    
     return render(request,'wishlist/editAccount.html')
 
 def item_edit(request):
