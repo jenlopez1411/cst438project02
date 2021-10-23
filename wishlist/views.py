@@ -52,14 +52,17 @@ def home(request):
     return render(request,'wishlist/home.html',{'wishlist': wishlist_list})
 
 def all_items(request):
-    return render(request,'wishlist/all_items.html')
+    items = Items.objects.filter(user_id = request.session['user_id'])
+    if 'current_list' in request.session:
+        request.session['current_list'] = '0'
+    return render(request,'wishlist/all_items.html', {"items": items})
 
 def full_list(request):
     if 'current_list' in request.session:
         if request.session['current_list'] != '0':
             wishlist = List.objects.get(list_id=request.session['current_list'])
             items = Items.objects.filter(list_id=request.session['current_list'])
-            request.session['current_list'] = '0'
+            #request.session['current_list'] = '0'
             return render(request,'wishlist/full_list.html', {"wishlist":wishlist, "items":items})
             
 
@@ -83,8 +86,10 @@ def new_item(request):
     item_priority = request.POST.get('priority')
     item = Items(name=item_name,url=item_url, description=item_description, picture_url=item_picture_url, user_priority=item_priority, slug=item_slug,user_id=request.session['user_id'], list_id=request.POST.get("list_id") )
     item.save()
-    request.session['current_list'] = request.POST.get("list_id")
-    return redirect('/items/list/')
+    if 'current_list' in request.session and request.POST.get("list_id")!= "0" :
+     request.session['current_list'] = request.POST.get("list_id")
+     return redirect('/items/list/')
+    return redirect('/items/')
 
 def delete_list(request):
 #Todo: add confirmation to delete
@@ -152,7 +157,24 @@ def editAccount(request, user_id):
             return render(request,'wishlist/editAccount.html', context)
 
 def item_edit(request):
-    return render(request,'wishlist/item_edit.html')
+    print(request.GET.get('item_id'))
+    item = Items.objects.get(item_id=request.GET.get('item_id'))
+    return render(request,'wishlist/item_edit.html', {"item":item})
+
+def edit_item(request):
+    item = Items.objects.get(item_id=request.POST.get('item_id'))
+    item.name = request.POST.get('itemname')
+    item.slug = item.name.replace(' ', '-')
+    item.url = request.POST.get('url')
+    item.description = request.POST.get('description')
+    item.picture_url = request.POST.get('pictureurl')
+    item.save()
+
+    if 'current_list' in request.session and request.session.get("list_id")!= "0" :
+     request.session['current_list'] = item.list_id
+     return redirect('/items/list/')
+    return redirect('/items/')
+
 
 def logout(request):
      request.session['user_id'] = -1;
