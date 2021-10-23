@@ -1,28 +1,46 @@
+from django.http import response
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from wishlist.models import Users, List, Items
-
+from .forms import UserForm
 
 # Create your views here.
-def index(request):
+def index(request):    
     return render(request,'wishlist/index.html')
 
 def login(request):
-    print(request.method)
-    if(request.method == 'POST'):
-        # print(request.POST.get("uname"))
-        # print(request.POST.get("psw"))
-        # print(Users.objects.filter(user_name=request.POST.get("uname"), password = request.POST.get("psw")).exists())
-        if Users.objects.filter(user_name=request.POST.get("uname"), password = request.POST.get("psw")).exists():
-            print(Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id)
-            request.session['user_id'] = Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id
-            request.session['current_list'] = 0
-            return redirect('/home/')
-    else:        
+    if request.method == 'POST':
+        user = request.POST
+        users = Users.objects.all()
+        for u in users.iterator():
+            if user["uname"] == u.user_name:
+                print(user["uname"] + " match")
+                # return render(request, 'wishlist/home.html', {'userID': u.user_id})
+                request.session['user_id'] = Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id                
+                request.session['current_list'] = 0
+                if u.user_name != 'admin': 
+                    return redirect('/home/')
+                else:
+                    return redirect('/new_admin/')
+                
+    else:
         return render(request,'wishlist/login.html')
 
 def create_account(request):
-    return render(request,'wishlist/create_account.html')
+    if request.method == 'POST':
+        name = request.POST
+        if Users.objects.filter(user_name=request.POST.get("uname")).exists():
+            print("error exists")
+            return render(request, 'wishlist/index.html', {'message': "Username already exists."})
+        else:
+            if name["psw"] == name["psw-repeat"]:
+                Users.objects.create(first_name = name["name"], user_name = name["uname"], password = name["psw"])
+                print("pasa")
+            else: 
+                print("error create acc")
+                #return render( request, 'wishlist/create_account.html', {'message': "Password does not match."})
+                return redirect('create-account', message = "Password does not match.")
+    return redirect('/')
 
 def home(request):
     if request.session['user_id'] > 0:
@@ -77,26 +95,64 @@ def delete_list(request):
     list.delete()
     return redirect('/home/')
 
-# account page using dummy data
+# account
 def account(request):
-    dummyUser = [
-        {'firstName': 'Jane',
-        'lastName': 'Doe',
-        'user_id': '1',
-        'username': 'jdoe',
-        'password': '12345',
-        'admin': 'false'
-        }
-        
-    ]
-    return render(request,'wishlist/account.html', {
-        'users': dummyUser
-    })
+    user_id = request.session['user_id']
+    users = Users.objects.all()
+    for u in users.iterator():
+        if user_id == u.user_id:
+            firstName = u.first_name
+            userName = u.user_name
+            # user_id = u.user_id
+            return render(request, 'wishlist/account.html', {
+                  'fname' : firstName,
+                  'userName': userName,
+                  'user_id' : user_id
+                  })
 
 # edit account page also using dummy data 
-def editAccount(request):
+def new_admin(request): 
+        users = Users.objects.all()
+        return render(request,'wishlist/new_admin.html',{'users':users})
+
+def delete_user(request):
+#Todo: add confirmation to delete
+    user = Users.objects.filter(user_id=request.POST.get("user_id"))
+    user.delete()
+    return redirect('/new_admin/')
+def create_user_admin(request):
+    first_name = request.POST.get('first_name')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    user = Users(first_name=first_name,user_name=username, password=password)
+    user.save()
+    return redirect('/new_admin/')
+
+def edit_user_admin(request):
+    user = Users.objects.get(user_id=request.POST.get('user_id'))
+    user.first_name = request.POST.get('first_name')
+    user.user_name = request.POST.get('username')
+    user.password = request.POST.get('password')
+    user.save()
+    return redirect('/new_admin/')
     
-    return render(request,'wishlist/editAccount.html')
+def editAccount(request, user_id):
+    user_id = request.session['user_id']
+    users = Users.objects.all()
+    for u in users.iterator():
+        if user_id == u.user_id:
+            user = Users.objects.get(user_id = user_id)
+            form = UserForm(instance=user)
+            if request.method == 'POST':
+                form = UserForm(request.POST, instance = user)
+                if(form.is_valid):
+                    form.save()
+                    return redirect('/account')
+            # return redirect('/')
+                
+            context = {'form': form}
+            return render(request,'wishlist/editAccount.html', context)
 
 def item_edit(request):
     print(request.GET.get('item_id'))
