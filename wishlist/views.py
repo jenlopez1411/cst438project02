@@ -99,8 +99,24 @@ def editAccount(request):
     return render(request,'wishlist/editAccount.html')
 
 def item_edit(request):
-    item = Items.objects.filter(item_id =request.GET.get('item_id'))
+    print(request.GET.get('item_id'))
+    item = Items.objects.get(item_id=request.GET.get('item_id'))
     return render(request,'wishlist/item_edit.html', {"item":item})
+
+def edit_item(request):
+    item = Items.objects.get(item_id=request.POST.get('item_id'))
+    item.name = request.POST.get('itemname')
+    item.slug = item.name.replace(' ', '-')
+    item.url = request.POST.get('url')
+    item.description = request.POST.get('description')
+    item.picture_url = request.POST.get('pictureurl')
+    item.save()
+
+    if 'current_list' in request.session and request.session.get("list_id")!= "0" :
+     request.session['current_list'] = item.list_id
+     return redirect('/items/list/')
+    return redirect('/items/')
+
 
 def logout(request):
      request.session['user_id'] = -1;

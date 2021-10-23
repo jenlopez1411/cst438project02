@@ -1,7 +1,7 @@
 {% extends 'wishlist/base/base.html' %}
 {% load static %}
 
-{% block tab_title %} item.name {% endblock %}
+{% block tab_title %} {{item.name}} {% endblock %}
 {% block body %}
    {% include 'wishlist/includes/item_form.html' with item=item %}
     {% endblock %}  
