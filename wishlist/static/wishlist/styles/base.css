@@ -74,6 +74,7 @@ margin: 8px 0;
 border: none;
 cursor: pointer;
 width: 100%;
+border-radius: 8px;
 }
 
 button:hover {
@@ -153,6 +154,39 @@ cursor: pointer;
   width: 50%;
   margin-top: 10%;  
   padding: 10%;
+}
+
+.wishlist h1 {
+  color: #3ca0be;
+  font-size: 50px;
+  text-shadow: 4px 4px #92dfbc;
+}
+
+.add-wishlist {
+  width: 25%;
+  padding: 2%;
+  color: #3ca0be;
+  font-size: 25px;
+}
+
+.add-wishlist button{
+  width: 20%;
+  background-color: rgb(14, 211, 96);
+}
+
+.click-wishlist {
+  width: 40%;
+  padding: 10px;
+  color: #3ca0be;
+}
+
+.view-click-wishlist button{
+  padding: 3%;
+  font-size: 25px;
+}
+
+.delete-click-wishlist button i{
+  color: #f44336;
 }
 
 /* Add Zoom Animation */
