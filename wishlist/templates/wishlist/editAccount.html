@@ -5,7 +5,7 @@
 {% block body %}
 
 <center><h1><b>EditUser Info</b></h1>
-    <br>
+    <!-- <br>
 
     <h2> Edit First Name: <input type="text" name = "newFname" placeholder = "First Name"></h2>
 
@@ -13,8 +13,13 @@
 
     <h2> Edit Userame: <input type="text" name = "newUname" placeholder = "Username"></h2>
 
-    <button onclick="location.href = '/account'">Cancel</button>
-    <button onclick="location.href = '/home'">Update</button>
+    <button onclick="location.href = '/home'">Cancel</button>
+    <button onclick="location.href = '/account'">Update</button> -->
     
+    <form action = " " method= "POST">
+        {%csrf_token%}
+        {{form}}
+        <input type ="submit" name ="Submit"> 
+        </form>
 </center>
     {% endblock %}  
