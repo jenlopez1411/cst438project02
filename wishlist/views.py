@@ -53,6 +53,8 @@ def home(request):
 
 def all_items(request):
     items = Items.objects.filter(user_id = request.session['user_id'])
+    if 'current_list' in request.session:
+        request.session['current_list'] = '0'
     return render(request,'wishlist/all_items.html', {"items": items})
 
 def full_list(request):
@@ -60,7 +62,7 @@ def full_list(request):
         if request.session['current_list'] != '0':
             wishlist = List.objects.get(list_id=request.session['current_list'])
             items = Items.objects.filter(list_id=request.session['current_list'])
-            request.session['current_list'] = '0'
+            #request.session['current_list'] = '0'
             return render(request,'wishlist/full_list.html', {"wishlist":wishlist, "items":items})
             
 
