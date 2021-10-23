@@ -4,18 +4,21 @@
 {% block tab_title %} Home {% endblock %}
 {% block body %}
 
-   <h1>List of all of Your Wishlist</h1>
-   <section id="wishlist_list">
-   {% for list in wishlist %}
-   {% include 'wishlist/includes/list.html' with name=list.list_name id=list.list_id slug=list.slug %}
-   {% endfor%}
-</section>
-
-   <form action='/new-list/' method="POST">
-      {% csrf_token %} 
-      <label for="new_list"><b>New Wishlist</b></label>
-          <input type="text" placeholder="New Wishlist" name="new_list" required>
-          <button type='submit'>Create a new Wishlist!</button>
-   </form>
+   <div class="wishlist">
+      <center><h1>Wishlists</h1></center>
+      <center><div class="add-wishlist">
+         <form action='/new-list/' method="POST">
+            {% csrf_token %} 
+            <label for="new_list"><b>New Wishlist</b></label>
+            <input type="text" placeholder="New Wishlist" name="new_list" required>
+            <button type='submit'><i class="fas fa-plus"></i></button>
+         </form>
+      </div></center>
+      <section>
+         {% for list in wishlist %}
+         {% include 'wishlist/includes/list.html' with name=list.list_name id=list.list_id slug=list.slug %}
+         {% endfor%}
+      </section>
+   </div>
     {% endblock %}  
   
