@@ -1,5 +1,5 @@
 html {
-  background-color: rgb(213, 231, 225);
+  background-color: #b9f0d7;
   font-family: Georgia;
 }
 body{
@@ -145,6 +145,14 @@ font-weight: bold;
 .close:focus {
 color: red;
 cursor: pointer;
+}
+
+.landing {
+  background-color: #9ae6c4;
+  background-image: linear-gradient(315deg, #92dfbc 0%, #3ca0be 74%);
+  width: 50%;
+  margin-top: 10%;  
+  padding: 10%;
 }
 
 /* Add Zoom Animation */
