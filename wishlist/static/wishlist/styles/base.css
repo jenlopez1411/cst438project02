@@ -7,6 +7,12 @@ body{
   margin: 0;
 }
 
+h1 {
+  color: #3ca0be;
+  font-size: 50px;
+  text-shadow: 4px 4px #92dfbc;
+}
+
 .nav ul {
   list-style-type: none;
   position: fixed;
@@ -154,12 +160,6 @@ cursor: pointer;
   width: 50%;
   margin-top: 10%;  
   padding: 10%;
-}
-
-.wishlist h1 {
-  color: #3ca0be;
-  font-size: 50px;
-  text-shadow: 4px 4px #92dfbc;
 }
 
 .add-wishlist {
