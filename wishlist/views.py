@@ -2,7 +2,7 @@ from django.http import response
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from wishlist.models import Users, List, Items
-
+from .forms import UserForm
 
 # Create your views here.
 def index(request):    
@@ -18,7 +18,11 @@ def login(request):
                 # return render(request, 'wishlist/home.html', {'userID': u.user_id})
                 request.session['user_id'] = Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id                
                 request.session['current_list'] = 0
-                return redirect('/home/')
+                if u.user_name != 'admin': 
+                    return redirect('/home/')
+                else:
+                    return redirect('/new_admin/')
+                
     else:
         return render(request,'wishlist/login.html')
 
@@ -88,26 +92,64 @@ def delete_list(request):
     list.delete()
     return redirect('/home/')
 
-# account page using dummy data
+# account
 def account(request):
-    dummyUser = [
-        {'firstName': 'Jane',
-        'lastName': 'Doe',
-        'user_id': '1',
-        'username': 'jdoe',
-        'password': '12345',
-        'admin': 'false'
-        }
-    ]
-    return render(request,'wishlist/account.html', {
-        'users': dummyUser
-    })
+    user_id = request.session['user_id']
+    users = Users.objects.all()
+    for u in users.iterator():
+        if user_id == u.user_id:
+            firstName = u.first_name
+            userName = u.user_name
+            # user_id = u.user_id
+            return render(request, 'wishlist/account.html', {
+                  'fname' : firstName,
+                  'userName': userName,
+                  'user_id' : user_id
+                  })
 
 # edit account page also using dummy data 
 def new_admin(request): 
-        return render(request,'wishlist/new_admin.html')
-def editAccount(request):
-    return render(request,'wishlist/editAccount.html')
+        users = Users.objects.all()
+        return render(request,'wishlist/new_admin.html',{'users':users})
+
+def delete_user(request):
+#Todo: add confirmation to delete
+    user = Users.objects.filter(user_id=request.POST.get("user_id"))
+    user.delete()
+    return redirect('/new_admin/')
+def create_user_admin(request):
+    first_name = request.POST.get('first_name')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    user = Users(first_name=first_name,user_name=username, password=password)
+    user.save()
+    return redirect('/new_admin/')
+
+def edit_user_admin(request):
+    user = Users.objects.get(user_id=request.POST.get('user_id'))
+    user.first_name = request.POST.get('first_name')
+    user.user_name = request.POST.get('username')
+    user.password = request.POST.get('password')
+    user.save()
+    return redirect('/new_admin/')
+    
+def editAccount(request, user_id):
+    user_id = request.session['user_id']
+    users = Users.objects.all()
+    for u in users.iterator():
+        if user_id == u.user_id:
+            user = Users.objects.get(user_id = user_id)
+            form = UserForm(instance=user)
+            if request.method == 'POST':
+                form = UserForm(request.POST, instance = user)
+                if(form.is_valid):
+                    form.save()
+                    return redirect('/account')
+            # return redirect('/')
+                
+            context = {'form': form}
+            return render(request,'wishlist/editAccount.html', context)
 
 def item_edit(request):
     return render(request,'wishlist/item_edit.html')
