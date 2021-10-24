@@ -238,3 +238,24 @@ span.psw {
 .add-user h2{
   color: #3ca0be;
 }
+
+.grid-container {
+  display: grid;
+  /* grid-template-columns: auto auto auto auto; */
+  /* grid-template-rows: 50%; */
+  grid-gap: 10px;
+  background-color: #b9f0d7;
+  padding: 2%;
+  width: 75%;
+}
+
+.item {
+  background-color:whitesmoke;
+  text-align: center;
+  padding: 2%;
+  font-size: 20px;
+}
+
+.grid-container a:visited{
+  color: #3ca0be;
+}

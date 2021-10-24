@@ -1,11 +1,14 @@
 <!--For Item Box-->
-<section id="item">
-    <h4>{{item.name}}</h4>
-    <img src="{{item.picture_url}}"><br>
-    <a target="_blank" href="{{item.url}}">URL</a>
-    <p>{{item.description}}</p>
-    <form action="/edit/">
-        <input type="hidden" value="{{item.item_id}}" name=item_id>
-        <button type="submit">Edit Item</button>
-    </form>
-</section>
+
+<div class="item">
+    <!-- <section id="item"> -->
+        <center><h4>{{item.name}}</h4>
+        <img style="width:150px;" src="{{item.picture_url}}"><br>
+        <a target="_blank" href="{{item.url}}">URL</a>
+        <p>{{item.description}}</p>
+        <form action="/edit/">
+            <input type="hidden" value="{{item.item_id}}" name=item_id>
+            <button style="width: 50%;" type="submit">Edit Item</button>
+        </form></center>
+    <!-- </section> -->
+</div>
