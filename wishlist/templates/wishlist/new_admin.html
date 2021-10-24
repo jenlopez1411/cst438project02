@@ -3,51 +3,48 @@
 
 {% block tab_title % } Account { %endblock % }
 {% block body %}
-<center><h1><b>Admin</b></h1>
+<center><h1>Admin</h1>
     
-<h2></h2>
-<div style="overflow: scroll;height:50vh;">
-{% for user in users %}
-<div>
-<form action="{% url 'delete-user' %}" method="POST"> 
-     {% csrf_token %} 
-    {{user.first_name}} - {{user.user_name}} <input type="hidden"name='user_id' value={{user.user_id}}> <button type="submit" style="background-color: transparent; display:inline; width:10px; font-size:25px; color:gray;">
-       <i class="far fa-trash-alt"></i></button></h1>  
-    </form> 
-    <details>
-    <summary><h3>Edit User</h3></summary>
-            <form action="/edit_user_admin/" method="POST"> {% csrf_token %} 
-               
-            <label for="first_name">First Name:</label><br>
-            <input type="text" id="first_name" name="first_name" value="{{user.first_name}}"><br>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" value="{{user.user_name}}"><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" value="{{user.password}}"><br>
-            <input type="hidden" id="user_id" name="user_id" value="{{user.user_id}}"><br>
-            <input type="submit" value="Submit">
-        </form>
-        </details>
-    
-    </form>  
-    </div>
+<div class="list-users" style="overflow: scroll;height:50vh;">
+   {% for user in users %}
+   <div class="one-user">
+      <form action="{% url 'delete-user' %}" method="POST"> 
+           {% csrf_token %} 
+          <h2> {{user.first_name}} - {{user.user_name}}
+          <input type="hidden"name='user_id' value={{user.user_id}}> <button type="submit" style="background-color: transparent; display:inline; width:10px; font-size:25px; color:gray;">
+             <i class="far fa-trash-alt"></i></button></h2>  
+          </form> 
+          <details>
+               <summary><h3>Edit User</h3></summary>
+               <form action="/edit_user_admin/" method="POST"> {% csrf_token %} 
+                  <label for="first_name">First Name:</label><br>
+                  <input type="text" id="first_name" name="first_name" value="{{user.first_name}}"><br>
+                  <label for="username">Username:</label><br>
+                  <input type="text" id="username" name="username" value="{{user.user_name}}"><br>
+                  <label for="password">Password:</label><br>
+                  <input type="password" id="password" name="password" value="{{user.password}}"><br>
+                  <input type="hidden" id="user_id" name="user_id" value="{{user.user_id}}"><br>
+                  <button type="submit" value="Submit"> Submit </button>
+              </form>
+            </details>
+   </div>
  {% endfor %}
  </div>
 
- <h2>Add New User</h2>
- <section id="user">
-    <form action="/new_user_admin/" method="POST">
-        {% csrf_token %} 
-        <label for="first_name">First Name:</label><br>
-        <input type="text" id="first_name" name="first_name"><br>
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br>
-        <input type="hidden" id="user_id" name="user_id"><br>
-        <input type="submit" value="Submit">
+ <div class="add-user">
+   <h2>Add New User</h2>
+   <section id="user">
+      <form action="/new_user_admin/" method="POST">
+         {% csrf_token %} 
+         <label for="first_name">First Name:</label><br>
+         <input type="text" id="first_name" name="first_name"><br>
+         <label for="username">Username:</label><br>
+         <input type="text" id="username" name="username"><br>
+         <label for="password">Password:</label><br>
+         <input type="password" id="password" name="password"><br>
+         <input type="hidden" id="user_id" name="user_id"><br>
+         <button type="submit" value="Submit"> Submit </button>
       </form> 
- 
 </div>
 </center>   
 {% endblock %}  
