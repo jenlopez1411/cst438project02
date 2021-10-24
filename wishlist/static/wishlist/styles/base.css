@@ -259,3 +259,12 @@ span.psw {
 .grid-container a:visited{
   color: #3ca0be;
 }
+
+.edit-item{
+  margin-top: 5%;
+  width: 50%;
+}
+
+.edit-item label{
+  font-size: 20px;
+}
