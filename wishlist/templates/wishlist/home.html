@@ -16,7 +16,7 @@
       </div></center>
       <section>
          {% for list in wishlist %}
-         {% include 'wishlist/includes/list.html' with name=list.list_name id=list.list_id slug=list.slug %}
+         {% include 'wishlist/includes/list.html' with name=list.list_name id=list.list_id %}
          {% endfor%}
       </section>
    </div>

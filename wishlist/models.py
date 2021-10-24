@@ -22,7 +22,6 @@ class Items(models.Model):
      description = models.TextField()
      picture_url = models.URLField()
      user_priority = models.CharField(max_length=1000)
-     slug = models.SlugField(unique=True)
 
      class Meta:
         managed = True
@@ -33,7 +32,6 @@ class List(models.Model):
     list_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
     list_name =  models.CharField(max_length=50)
-    slug = models.SlugField(unique=True)
 
     class Meta:
         managed = True

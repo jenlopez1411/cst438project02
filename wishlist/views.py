@@ -79,19 +79,17 @@ def full_list(request):
 
 def new_list(request):
     wishlist_name = request.POST.get('new_list');
-    wishlist_slug = wishlist_name.replace(' ', '-')
-    wishlist = List(list_name=wishlist_name,slug=wishlist_slug,user_id=request.session['user_id'])
+    wishlist = List(list_name=wishlist_name,user_id=request.session['user_id'])
     wishlist.save()
     return redirect('/home/')
 
 def new_item(request):
     item_name = request.POST.get('new_name')
-    item_slug = item_name.replace(' ', '-')
     item_url = request.POST.get('new_url')
     item_description = request.POST.get('new_description')
     item_picture_url = request.POST.get('new_picture_url')
     item_priority = request.POST.get('priority')
-    item = Items(name=item_name,url=item_url, description=item_description, picture_url=item_picture_url, user_priority=item_priority, slug=item_slug,user_id=request.session['user_id'], list_id=request.POST.get("list_id") )
+    item = Items(name=item_name,url=item_url, description=item_description, picture_url=item_picture_url, user_priority=item_priority,user_id=request.session['user_id'], list_id=request.POST.get("list_id") )
     item.save()
     if 'current_list' in request.session and request.POST.get("list_id")!= "0" :
      request.session['current_list'] = request.POST.get("list_id")
@@ -178,7 +176,6 @@ def item_edit(request):
 def edit_item(request):
     item = Items.objects.get(item_id=request.POST.get('item_id'))
     item.name = request.POST.get('itemname')
-    item.slug = item.name.replace(' ', '-')
     item.url = request.POST.get('url')
     item.description = request.POST.get('description')
     item.picture_url = request.POST.get('pictureurl')
