@@ -4,7 +4,7 @@
 {% block tab_title % } Account { %endblock % }
 {% block body %}
 
-<center><h1><b>EditUser Info</b></h1>
+<center><div style="width:50%;"><h1>Edit User Info</h1>
     <!-- <br>
 
     <h2> Edit First Name: <input type="text" name = "newFname" placeholder = "First Name"></h2>
@@ -19,7 +19,7 @@
     <form action = " " method= "POST">
         {%csrf_token%}
         {{form}}
-        <input type ="submit" name ="Submit"> 
+        <button type ="submit" name ="Submit">Submit</button>
         </form>
-</center>
+</div></center>
     {% endblock %}  

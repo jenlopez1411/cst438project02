@@ -1,4 +1,4 @@
-<section id="item">
+<center><section class="edit-item">
     <form action="/edit-item/" method="POST">
       {% csrf_token %}
       
@@ -11,6 +11,6 @@
         <label for="pictureurl">Picture URL:</label><br>
         <input type="text" id="pictureurl" name="pictureurl" value="{{item.picture_url}}"><br><br>
         <input type="hidden" value="{{item.item_id}}" name=item_id>
-        <input type="submit" value="Submit">
+        <button type="submit" value="Submit">Submit</button>
       </form> 
-</section>
+</section></center>
