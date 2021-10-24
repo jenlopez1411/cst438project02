@@ -215,3 +215,26 @@ span.psw {
    width: 100%;
 }
 }
+
+.list-users {
+  width: 75%;
+}
+
+.list-users h2{
+  color: #3ca0be;
+}
+
+.one-user{
+  border: 5px solid #3ca0be;
+  padding: 35px;
+  margin: 20px;
+}
+
+.add-user{
+  margin-top: 75px;
+  width: 50%;
+}
+
+.add-user h2{
+  color: #3ca0be;
+}
