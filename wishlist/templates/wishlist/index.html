@@ -3,14 +3,14 @@
 
 {%block title %}Landing {% endblock  %}
 
-{% block body %}
-    <center><div class="landing">
+{% block body %}  
+    <center><p style="color: rgb(173, 28, 28);"> {{ message }}</p><div class="landing">
       <h1 style="color: rgb(241, 241, 241); text-shadow: none;"> Welcome to Wishlist </h1>
       <h3 style="color: rgb(241, 241, 241);"> You got a <b>BIG</b> wish put it in a list! </h3>
       <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
       <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
     </div></center>
-
+  
     <div id="id01" class="modal">
       <form class="modal-content animate" action="login/" method="post">
         {% csrf_token %}
@@ -70,7 +70,7 @@
         </form>
       </div>
       
-  <p>{{ message }}</p>
+ 
     <script>
         // Get the modal
         var modal = document.getElementById('id01');

@@ -35,6 +35,9 @@ ALLOWED_HOSTS = ['wishlistgroupn.herokuapp.com',
 
 
 # Application definition
+import sys
+
+sys.modules['fontawesome_free'] = __import__('fontawesome-free')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -43,7 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fontawesome_free',
     'wishlist'
+    
 ]
 
 MIDDLEWARE = [

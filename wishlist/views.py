@@ -7,34 +7,48 @@ from .forms import UserForm
 # Create your views here.
 def index(request):
     request.session['user_id'] = 0
-    request.session['admin'] = 0     
-    return render(request,'wishlist/index.html')
+    request.session['admin'] = 0 
+    if 'login_fail' not in request.session:
+        request.session['login_fail'] = 0 
+    if request.session['login_fail'] == 0:  
+        return render(request,'wishlist/index.html', {'message' : ""})
+    elif request.session['login_fail'] == 1:
+        return render(request,'wishlist/index.html', {'message' : "Username/Password is wrong."})
+    else:
+        return render(request,'wishlist/index.html', {'message' : "Similar user created, please sign up again"})
+
 
 def login(request):
     if request.method == 'POST':
         user = request.POST
         users = Users.objects.all()
         for u in users.iterator():
-            if user["uname"] == u.user_name:
+            if user["uname"] == u.user_name and user["psw"] == u.password:
                 print(user["uname"] + " match")
                 # return render(request, 'wishlist/home.html', {'userID': u.user_id})
                 request.session['user_id'] = Users.objects.get(user_name=request.POST.get("uname"), password = request.POST.get("psw")).user_id                
                 request.session['current_list'] = 0
+                request.session['login_fail'] = 0
                 if u.user_name != 'admin': 
                     return redirect('/home/')
                 else:
                     request.session['admin'] = 1
+                    request.session['login_fail'] = 0
                     return redirect('/new_admin/')
-                
+            else:
+                request.session['login_fail'] = 1
+                return redirect('/')
+             
     else:
-        return render(request,'wishlist/login.html')
+        return render(request,'wishlist/index.html')
 
 def create_account(request):
     if request.method == 'POST':
         name = request.POST
         if Users.objects.filter(user_name=request.POST.get("uname")).exists():
             print("error exists")
-            return render(request, 'wishlist/index.html', {'message': "Username already exists."})
+            request.session['login_fail'] = 2
+            return redirect('/')
         else:
             if name["psw"] == name["psw-repeat"]:
                 Users.objects.create(first_name = name["name"], user_name = name["uname"], password = name["psw"])
@@ -190,4 +204,5 @@ def edit_item(request):
 def logout(request):
      request.session['user_id'] = 0
      request.session['admin'] = 0
+     request.session['login_fail'] = 0 
      return redirect('/')
