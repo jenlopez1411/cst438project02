@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('picture_url', models.URLField()),
                 ('user_priority', models.CharField(max_length=1000)),
-                ('slug', models.SlugField(unique=True)),
+        
             ],
             options={
                 'db_table': 'Item',
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('list_id', models.AutoField(primary_key=True, serialize=False)),
                 ('user_id', models.IntegerField()),
                 ('list_name', models.CharField(max_length=50)),
-                ('slug', models.SlugField(unique=True)),
+                
             ],
             options={
                 'db_table': 'List',
