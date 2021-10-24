@@ -5,7 +5,9 @@ from wishlist.models import Users, List, Items
 from .forms import UserForm
 
 # Create your views here.
-def index(request):    
+def index(request):
+    request.session['user_id'] = 0
+    request.session['admin'] = 0     
     return render(request,'wishlist/index.html')
 
 def login(request):
@@ -21,6 +23,7 @@ def login(request):
                 if u.user_name != 'admin': 
                     return redirect('/home/')
                 else:
+                    request.session['admin'] = 1
                     return redirect('/new_admin/')
                 
     else:
@@ -47,17 +50,21 @@ def home(request):
         wishlist_list = List.objects.filter(user_id = request.session['user_id'])
         request.session['current_list'] = '0'
     else:
-        return redirect('/login/')
+        return redirect('/')
 
     return render(request,'wishlist/home.html',{'wishlist': wishlist_list})
 
 def all_items(request):
+    if request.session['user_id'] == 0:
+        return redirect('/')
     items = Items.objects.filter(user_id = request.session['user_id'])
     if 'current_list' in request.session:
         request.session['current_list'] = '0'
     return render(request,'wishlist/all_items.html', {"items": items})
 
 def full_list(request):
+    if request.session['user_id'] == 0:
+        return redirect('/')
     if 'current_list' in request.session:
         if request.session['current_list'] != '0':
             wishlist = List.objects.get(list_id=request.session['current_list'])
@@ -99,6 +106,8 @@ def delete_list(request):
 
 # account
 def account(request):
+    if request.session['user_id'] == 0:
+        return redirect('/')
     user_id = request.session['user_id']
     users = Users.objects.all()
     for u in users.iterator():
@@ -113,9 +122,13 @@ def account(request):
                   })
 
 # edit account page also using dummy data 
-def new_admin(request): 
-        users = Users.objects.all()
-        return render(request,'wishlist/new_admin.html',{'users':users})
+def new_admin(request):
+    if request.session['user_id'] == 0:
+        return redirect('/')
+    if request.session['admin'] == 0:
+        return redirect('/home/') 
+    users = Users.objects.all()
+    return render(request,'wishlist/new_admin.html',{'users':users})
 
 def delete_user(request):
 #Todo: add confirmation to delete
@@ -140,6 +153,8 @@ def edit_user_admin(request):
     return redirect('/new_admin/')
     
 def editAccount(request, user_id):
+    if request.session['user_id'] == 0:
+        return redirect('/') 
     user_id = request.session['user_id']
     users = Users.objects.all()
     for u in users.iterator():
@@ -157,7 +172,6 @@ def editAccount(request, user_id):
             return render(request,'wishlist/editAccount.html', context)
 
 def item_edit(request):
-    print(request.GET.get('item_id'))
     item = Items.objects.get(item_id=request.GET.get('item_id'))
     return render(request,'wishlist/item_edit.html', {"item":item})
 
@@ -177,5 +191,6 @@ def edit_item(request):
 
 
 def logout(request):
-     request.session['user_id'] = -1;
+     request.session['user_id'] = 0
+     request.session['admin'] = 0
      return redirect('/')
